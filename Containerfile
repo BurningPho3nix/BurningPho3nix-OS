@@ -60,6 +60,8 @@ RUN mkdir -p /var/lib/alternatives && \
     --uninstall burningpho3nix-Setup-Tool-fedora && \
     rpm-ostree install steam && \
     rpm-ostree install steam-devices && \
+    rpm-ostree install setup-tool && \
+    rpm-ostree install easy-rpm-ostree-tooling && \
     rpm-ostree cleanup -m && \
     ostree container commit
 ## NOTES:
