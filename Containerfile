@@ -52,12 +52,10 @@ COPY build.sh /tmp/build.sh
 
 RUN mkdir -p /var/lib/alternatives && \
     /tmp/build.sh && \
-    rpm-ostree install \
+    ostree remote add easy-rpm-ostree-tools \
     https://copr.fedorainfracloud.org/coprs/burningpho3nix/private-projects/repo/fedora-$(rpm -E %fedora)/burningpho3nix-private-projects-fedora-$(rpm -E %fedora).repo \
+    ostree remote add Setup-Tool \
     https://copr.fedorainfracloud.org/coprs/burningpho3nix/Setup-Tool/repo/fedora-$(rpm -E %fedora)/burningpho3nix-Setup-Tool-fedora-$(rpm -E %fedora).repo && \
-   # rpm-ostree install burningpho3nix-private-projects-fedora burningpho3nix-Setup-Tool-fedora \
-   # --uninstall burningpho3nix-private-projects-fedora \
-   # --uninstall burningpho3nix-Setup-Tool-fedora && \
     rpm-ostree install steam && \
     rpm-ostree install steam-devices && \
     rpm-ostree install setup-tool && \
