@@ -36,7 +36,7 @@ ARG SOURCE_IMAGE="aurora"
 # ARG SOURCE_SUFFIX="stable"
 
 ## SOURCE_TAG arg must be a version built for the specific image: eg, 39, 40, gts, latest
-ARG SOURCE_TAG="40"
+ARG SOURCE_TAG="latest"
 
 
 ### 2. SOURCE IMAGE
@@ -52,8 +52,6 @@ COPY build.sh /tmp/build.sh
 
 RUN mkdir -p /var/lib/alternatives && \
     /tmp/build.sh && \
-    ostree remote add easy-rpm-ostree-tools \
-    https://copr.fedorainfracloud.org/coprs/burningpho3nix/private-projects/repo/fedora-$(rpm -E %fedora)/burningpho3nix-private-projects-fedora-$(rpm -E %fedora).repo \
     ostree remote add Setup-Tool \
     https://copr.fedorainfracloud.org/coprs/burningpho3nix/Setup-Tool/repo/fedora-$(rpm -E %fedora)/burningpho3nix-Setup-Tool-fedora-$(rpm -E %fedora).repo && \
     rpm-ostree install \
@@ -62,7 +60,6 @@ RUN mkdir -p /var/lib/alternatives && \
     rpm-ostree install steam && \
     rpm-ostree install steam-devices && \
     rpm-ostree install setup-tool && \
-    rpm-ostree install easy-rpm-ostree-tooling && \
     rpm-ostree override remove libavfilter-free libavformat-free libavcodec-free libavutil-free libpostproc-free libswresample-free libswscale-free --install=ffmpeg && \
     rpm-ostree install gstreamer1-plugin-libav gstreamer1-plugins-bad-free-extras gstreamer1-plugins-ugly gstreamer1-vaapi && \
     rpm-ostree override remove mesa-va-drivers --install=mesa-va-drivers-freeworld && \
